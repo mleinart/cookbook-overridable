@@ -22,7 +22,8 @@ action :create do
   if node['overridable']['template']['enabled'] and node['overridable']['template']['templates_enabled']
     begin
       template_override_path = ::File.join(new_resource.override_path,::File.basename(new_resource.source))
-      cookbook.relative_filenames_in_preferred_directory(node, :templates, template_override_path)
+      filenames = cookbook.relative_filenames_in_preferred_directory(node, :templates, new_resource.override_path)
+      if filenames.include? new_resource.source
       template_override = template_override_path
     rescue Chef::Exceptions::FileNotFound => e
     end
@@ -31,7 +32,7 @@ action :create do
   if node['overridable']['template']['enabled'] and node['overridable']['template']['files_enabled']
     begin
       file_override_path = ::File.basename(new_resource.path)
-      cookbook.relative_filenames_in_preferred_directory(node, :files, file_override_path)
+      cookbook.preferred_filename_on_disk_location(node, :files, file_override_path)
       file_override = file_override_path
     rescue Chef::Exceptions::FileNotFound => e
     end
