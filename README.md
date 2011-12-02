@@ -19,16 +19,16 @@ Attributes
 Usage
 =====
 
-#### Cookbook Authors
+## Cookbook Authors
 To use the LWRP in your cookbook, simply add `depends 'overridable'` to the
 cookbook's *metadata.rb* and substitute any `template` resources
 with `overridable_template`
 
-#### Cookbook Users
+## Cookbook Users
 When config file customization is needed on a cookbook that takes advantage of
 *overridable* template, two options are available:
 
-## Custom template
+### Custom template
 Copy the cookbook's provided template file to a new file of the same name
 within the cookbook's templates/overrides directory.
 Ex: `templates/default/web_app.conf.erb` maps to `templates/default/overrides/web_app.conf.erb`
@@ -37,7 +37,7 @@ attributes/ directory and referenced through the `@node` reference exposed to
 the Erb template. File-specificity rules are honored, so the `override/` path can
 exist in a host-specific directory instead for instance.
 
-## Custom file
+### Custom file
 A file can replace the template behavior entirely (ensure you have dealt with
 any dynamic aspect of the config you're replacing). The file must be named
 the same as the destination path of the template resource
