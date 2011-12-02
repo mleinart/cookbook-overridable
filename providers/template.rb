@@ -8,6 +8,10 @@
 #XXX Should we respect the cookbook parameter or does it make sense to
 # ignore it in the case of overrides?
 
+action :nothing do
+  action_create
+end
+
 action :create do
   cookbook_name = new_resource.cookbook || new_resource.cookbook_name
   cookbook = run_context.cookbook_collection[cookbook_name]
@@ -24,11 +28,12 @@ action :create do
     end
   end
 
-  unless node['overridable']['disabled'] or node['overridable']['files_disabled']
+  unless node['overridable']['template']['disabled'] or node['overridable']['template']['files_disabled']
     begin
       file_override_path = ::File.basename(new_resource.path)
       cookbook.relative_filenames_in_preferred_directory(node, :files, file_override_path)
       file_override = file_override_path
+    rescue Chef::Exceptions::FileNotFound => e
     end
   end
 
@@ -41,7 +46,7 @@ action :create do
       mode new_resource.mode if new_resource.mode
       owner new_resource.owner if new_resource.owner
       path new_resource.path if new_resource.path
-      source "#{file_override}"
+      source file_override
     end
   else
     template "#{new_resource.path}" do
@@ -53,8 +58,8 @@ action :create do
       mode new_resource.mode if new_resource.mode
       owner new_resource.owner if new_resource.owner
       path new_resource.path if new_resource.path
-      variables new_resource.path if new_resource.variables
-      source "#{template_override}" || new_resource.source
+      variables new_resource.variables if new_resource.variables
+      source template_override || new_resource.source
     end
   end
 end
