@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: flex-template
+# Cookbook Name:: flex_template
 # Resource:: repository
 #
 # Copyright 2011, Michael Leinartas

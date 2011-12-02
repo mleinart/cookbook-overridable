@@ -1,7 +1,7 @@
 Description
 ===========
 
-The *flex-template* cookbook provides an LWRP that makes it simple to provide
+The *flex_template* cookbook provides an LWRP that makes it simple to provide
 maximum user flexibility in cookbook templates. When used instead of the
 standard Template resource (<http://wiki.opscode.com/display/chef/Resources#Resources-Template>),
 it provides a means for a cookbook user to override each template with either
@@ -9,11 +9,11 @@ the user's own template or a concrete file.
 
 Attributes
 ==========
-* `node['flex-template']['disabled']` - Default: `false`. Setting to `true`
+* `node['flex_template']['disabled']` - Default: `false`. Setting to `true`
   passes through to the standard Template behavior
-* `node['flex-template']['files_disabled']` - Default: `false`. Setting to `true`
+* `node['flex_template']['files_disabled']` - Default: `false`. Setting to `true`
   disables the ability to override from files
-* `node['flex-template']['templates_disabled']` - Default: `false`. Setting to
+* `node['flex_template']['templates_disabled']` - Default: `false`. Setting to
   `true` disables the ability to override existing templates with new templates
 
 Usage
@@ -21,14 +21,14 @@ Usage
 
 Cookbook Authors
 ----------------
-To use the LWRP in your cookbook, simply add `depends 'flex-template'` to the
+To use the LWRP in your cookbook, simply add `depends 'flex_template'` to the
 cookbook's *metadata.rb* and substitute any `template` resources
 to `flex_template`
 
 Cookbook Users
 --------------
 When config file customization is needed on a cookbook that takes advantage of
-*flex-template*, two options are available:
+*flex_template*, two options are available:
 
 ## Custom template
 Copy the cookbook's provided template file to a new file of the same name
