@@ -9,12 +9,12 @@ the user's own template or a concrete file.
 
 Attributes
 ==========
-* `node['overridable']['template']['disabled']` - Default: `false`. Setting to `true`
+* `node['overridable']['template']['enabled']` - Default: `true`. Setting to `false`
   passes through to the standard Template behavior
-* `node['overridable']['template']['files_disabled']` - Default: `false`. Setting to `true`
+* `node['overridable']['template']['files_enabled']` - Default: `true`. Setting to `false`
   disables the ability to override from files
-* `node['overridable']['template']['templates_disabled']` - Default: `false`. Setting to
-  `true` disables the ability to override existing templates with new templates
+* `node['overridable']['template']['templates_enabled']` - Default: `true`. Setting to
+  `false` disables the ability to override existing templates with new templates
 
 Usage
 =====

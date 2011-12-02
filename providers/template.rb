@@ -19,7 +19,7 @@ action :create do
   template_override = nil
   file_override = nil
 
-  unless node['overridable']['template']['disabled'] or node['overridable']['template']['templates_disabled']
+  if node['overridable']['template']['enabled'] and node['overridable']['template']['templates_enabled']
     begin
       template_override_path = ::File.join(new_resource.override_path,::File.basename(new_resource.source))
       cookbook.relative_filenames_in_preferred_directory(node, :templates, template_override_path)
@@ -28,7 +28,7 @@ action :create do
     end
   end
 
-  unless node['overridable']['template']['disabled'] or node['overridable']['template']['files_disabled']
+  if node['overridable']['template']['enabled'] and node['overridable']['template']['files_enabled']
     begin
       file_override_path = ::File.basename(new_resource.path)
       cookbook.relative_filenames_in_preferred_directory(node, :files, file_override_path)
