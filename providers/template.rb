@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: flex_template
+# Cookbook Name:: overridable
 # Provider:: repository
 #
 # Copyright 2011, Michael Leinartas
@@ -15,7 +15,7 @@ action :create do
   template_override = nil
   file_override = nil
 
-  unless node['flex_template']['disabled'] or node['flex_template']['templates_disabled']
+  unless node['overridable']['template']['disabled'] or node['overridable']['template']['templates_disabled']
     begin
       template_override_path = ::File.join(new_resource.override_path,::File.basename(new_resource.source))
       cookbook.relative_filenames_in_preferred_directory(node, :templates, template_override_path)
@@ -24,7 +24,7 @@ action :create do
     end
   end
 
-  unless node['flex_template']['disabled'] or node['flex_template']['files_disabled']
+  unless node['overridable']['disabled'] or node['overridable']['files_disabled']
     begin
       file_override_path = ::File.basename(new_resource.path)
       cookbook.relative_filenames_in_preferred_directory(node, :files, file_override_path)

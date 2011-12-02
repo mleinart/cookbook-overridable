@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: flex_template
+# Cookbook Name:: overridable
 # Resource:: repository
 #
 # Copyright 2011, Michael Leinartas

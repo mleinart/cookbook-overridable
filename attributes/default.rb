@@ -1,3 +1,3 @@
-default['flex_template']['disabled'] = false
-default['flex_template']['files_disabled'] = false
-default['flex_template']['templates_disabled'] = false
+default['overridable']['template']['disabled'] = false
+default['overridable']['template']['files_disabled'] = false
+default['overridable']['template']['templates_disabled'] = false
