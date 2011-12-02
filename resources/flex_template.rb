@@ -12,7 +12,6 @@ actions :create, :create_if_missing
 attribute :backup, :kind_of => [ Integer, FalseClass ]
 attribute :checksum, :regex => /^[a-zA-Z0-9]{64}$/
 attribute :cookbook, :kind_of => String
-attribute :content, :kind_of => String
 attribute :group, :kind_of => String
 attribute :local, :kind_of => [ TrueClass, FalseClass ]
 attribute :mode, :kind_of => String
