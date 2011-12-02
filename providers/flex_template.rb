@@ -49,10 +49,12 @@ action :create do
       backup new_resource.backup if new_resource.backup
       cookbook new_resource.cookbook if new_resource.cookbook
       group new_resource.group if new_resource.group
+      local new_resource.local if new_resource.local
       mode new_resource.mode if new_resource.mode
       owner new_resource.owner if new_resource.owner
       path new_resource.path if new_resource.path
-        source "#{template_override}" || new_resource.source
+      variables new_resource.path if new_resource.variables
+      source "#{template_override}" || new_resource.source
     end
   end
 end
