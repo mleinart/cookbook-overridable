@@ -20,18 +20,16 @@ action :create do
   file_override = nil
 
   if node['overridable']['template']['enabled'] and node['overridable']['template']['templates_enabled']
-    begin
-      template_override_path = ::File.join(new_resource.override_path,::File.basename(new_resource.source))
-      filenames = cookbook.relative_filenames_in_preferred_directory(node, :templates, new_resource.override_path)
-      if filenames.include? new_resource.source
+    template_override_path = ::File.join(new_resource.override_path,::File.basename(new_resource.source))
+    filenames = cookbook.relative_filenames_in_preferred_directory(node, :templates, new_resource.override_path) rescue []
+    if filenames.include? new_resource.source
       template_override = template_override_path
-    rescue Chef::Exceptions::FileNotFound => e
     end
   end
 
   if node['overridable']['template']['enabled'] and node['overridable']['template']['files_enabled']
+    file_override_path = ::File.basename(new_resource.path)
     begin
-      file_override_path = ::File.basename(new_resource.path)
       cookbook.preferred_filename_on_disk_location(node, :files, file_override_path)
       file_override = file_override_path
     rescue Chef::Exceptions::FileNotFound => e
@@ -39,6 +37,7 @@ action :create do
   end
 
   if file_override
+    log "Applying file override for override_template[#{new_resource.path}]"
     file "#{new_resource.path}" do
       action (new_resource.only_if_missing ? :create_if_missing : :create)
       backup new_resource.backup if new_resource.backup
@@ -50,6 +49,7 @@ action :create do
       source file_override
     end
   else
+    log "Applying template override for override_template[#{new_resource.path}]"
     template "#{new_resource.path}" do
       action (new_resource.only_if_missing ? :create_if_missing : :create)
       backup new_resource.backup if new_resource.backup
