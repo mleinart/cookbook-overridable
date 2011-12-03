@@ -38,7 +38,7 @@ action :create do
 
   if file_override
     log "Applying file override for override_template[#{new_resource.path}]"
-    file "#{new_resource.path}" do
+    cookbook_file "#{new_resource.path}" do
       action (new_resource.only_if_missing ? :create_if_missing : :create)
       backup new_resource.backup if new_resource.backup
       cookbook new_resource.cookbook if new_resource.cookbook
