@@ -37,7 +37,7 @@ action :create do
   end
 
   if file_override
-    log "Applying file override for override_template[#{new_resource.path}]"
+    Chef::Log.info("Applying file override for override_template[#{new_resource.path}]")
     cookbook_file "#{new_resource.path}" do
       action (new_resource.only_if_missing ? :create_if_missing : :create)
       backup new_resource.backup if new_resource.backup
@@ -49,7 +49,7 @@ action :create do
       source file_override
     end
   else
-    log "Applying template override for override_template[#{new_resource.path}]"
+    Chef::Log.info("Applying template override for override_template[#{new_resource.path}]")
     template "#{new_resource.path}" do
       action (new_resource.only_if_missing ? :create_if_missing : :create)
       backup new_resource.backup if new_resource.backup
